@@ -8,38 +8,51 @@ void display3();
 void trees();
 int i,j,flag=0;
 
+char name1[100]="4NM16CS136      Shelton Blaze D'Souza";
+char name2[100]="4NM16CS137      Shetty Yashas Shashidhar";
+char name3[100]="4NM16CS138      Shibani Bhandary";
+char proj[50]="AIRPORT SIMULATION";
 char s[20]="PRESS S TO START";
 char s1[100]="PRESS Q TO EXIT";
 char s2[100]="PRESS T TO TAKE-OFF THE PLANE";
 char s3[100]="PRESS L TO LAND THE PLANE";
-
-
- /*void update(int value)
-{
-	a+=0.0;	//Plane position takeoff on x axis
-	b-=0.0;	//Road Strip backward movement
-	c+=0;	//take off at certain angle on y axis
-
-	glutPostRedisplay();
-	glutTimerFunc(20,update,0);//delay
-}*/
-
 
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     if(flag==0)
     {
+
         glColor3f(1.0,1.0,1.0);
-        glRasterPos3f(200,350,0);
+        glRasterPos3f(175,450,0);
+        for(i=0;name1[i]!='\0';i++)
+        glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24,name1[i]);
+
+        glColor3f(1.0,1.0,1.0);
+        glRasterPos3f(175,425,0);
+        for(i=0;name2[i]!='\0';i++)
+        glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24,name2[i]);
+
+        glColor3f(1.0,1.0,1.0);
+        glRasterPos3f(175,400,0);
+        for(i=0;name3[i]!='\0';i++)
+        glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24,name3[i]);
+
+        glColor3f(1.0,0.0,0);
+        glRasterPos3f(190,310,0);
+        for(i=0;proj[i]!='\0';i++)
+        glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24,proj[i]);
+
+        glColor3f(1.0,1.0,1.0);
+        glRasterPos3f(200,225,0);
         for(i=0;s[i]!='\0';i++)
         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24,s[i]);
 
-        glRasterPos3f(200,250,0);
+        glRasterPos3f(200,200,0);
         for(i=0;s1[i]!='\0';i++)
         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24,s1[i]);
 
-        glRasterPos3f(165,150,0);
+        glRasterPos3f(165,125,0);
         for(i=0;s2[i]!='\0';i++)
         glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24,s2[i]);
 
@@ -63,7 +76,6 @@ void display(void)
 
 
         //plane construction
-
         glPushMatrix();
         glTranslated(a,c,0.0);
         glColor3f(1,1,1);
@@ -156,7 +168,6 @@ void display(void)
 
 void road()
 {
-
         glColor3f(0.0,0.0,0.0);
         glBegin(GL_POLYGON);//black road
         glVertex2f(0.0,0.0);
@@ -250,8 +261,6 @@ void display2()
 {
 
         glClear(GL_COLOR_BUFFER_BIT);
-
-
         //green
         glBegin(GL_POLYGON);
         glColor3f(0.0,1.0,0.0);
@@ -437,76 +446,71 @@ void display3()
         glVertex2f(100.0,40.0);
         glVertex2f(80.0,15.0);
         glVertex2f(50.0,15.0);
-
         glEnd();
-
         glPopMatrix();
+	
+	
         glutSwapBuffers();
 }
 
 
 void myinit()
 {
-
         glClearColor(0.0f,0.0f,1.0f,0.0f);
         glColor3f(1.0,0.0,0.0);
         glPointSize(1.0);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluOrtho2D(0.0,500.0,0.0,500.0);
-
 }
 
 
 void keys(unsigned char key,int x,int y)
 {
-
-    if(key=='s'){
+    	if(key=='s'){
 		flag=1;
 		display();}
-
+	
 
 	if(key=='q') exit(0);
 
 
 	if(key=='t')
 	{
-	    a=-170;
-        b=0.0;
-        c=20;
-        while(a<504 || c<422)
-        {
-            if(a>100)
-                c+=0.08;//take off at certain angle on y axis
+	    	a=-170;
+		b=0.0;
+		c=20;
+		while(a<504 || c<422)
+		{
+		    if(a>100)
+			c+=0.8;//take off at certain angle on y axis
+		    a+=0.8;	//Plane position takeoff on x axis
+		    b-=0.8;	//Road Strip backward movement
 
-            a+=0.08;	//Plane position takeoff on x axis
-            b-=0.08;	//Road Strip backward movement
-
-            if(b<=-100.0) // moving of run way
-                b=0.0;//take off at certain angle on y axis
-            display();
-        }
+		    if(b<=-100.0) // moving of run way
+			b=0.0;//take off at certain angle on y axis
+		    display();
+		}
 	}
+	
+	
 	if(key=='l')
 	{
-	    a=-170;
-        b=0.0;
-	    c=450;
-        while(a<504 )
-        {
-            if(a<300 && c>20)
-                c-=0.08;//take off at certain angle on y axis
+		a=-170;
+		b=0.0;
+		c=450;
+		while(a<504 )
+		{
+		    if(a<300 && c>20)
+			c-=0.8;//take off at certain angle on y axis
+		    a+=0.8;	//Plane position takeoff on x axis
+		    b-=0.8;	//Road Strip backward mvement
 
-            a+=0.08;	//Plane position takeoff on x axis
-            b-=0.08;	//Road Strip backward movement
-
-            if(b<=-100.0) // moving of run way
-                b=0.0;//take off at certain angle on y axis
-            display();
-        }
-	}
-
-    display();
+		    if(b<=-100.0) // moving of run way
+			b=0.0;//take off at cer0.tain angle on y axis
+		    display();
+		}
+	}display();
 }
 
 
@@ -514,12 +518,11 @@ int main(int argc, char* argv[])
 {
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-        glutInitWindowSize(1000.0,1000.0);
+        glutInitWindowSize(1000,1000);
         glutInitWindowPosition(0,0);
-        glutCreateWindow("Airplane Take-off");
+        glutCreateWindow("Airport Simulation");
         glutDisplayFunc(display);
         myinit();
         glutKeyboardFunc(keys);
-       // glutTimerFunc(20,update,0);
         glutMainLoop();
 }
